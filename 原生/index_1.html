@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="oBtn">按钮</button>
+
+<script type="text/javascript">
+    const oBtn = document.getElementById("oBtn");
+    oBtn.onclick = function(){
+        //get方式
+        let ajax = new XMLHttpRequest();
+        ajax.open("get","1.txt",true);//get方式下，数据放在url之后
+        ajax.send();//post需要传入数据
+        ajax.onreadystatechange = function(){
+            if(ajax.readyState == 4 && ajax.status == 200){
+                    alert(ajax.responseText);
+                }
+            }
+        /*
+        //post方式
+         let ajax = new XMLHttpRequest();
+         ajax.open("post","1.txt",true);
+         ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");//设置请求头
+         ajax.send();//写需要传入数据
+         ajax.onreadystatechange = function(){
+             if(ajax.readyState == 4 && ajax.status == 200){
+                 alert(ajax.responseText);
+                  }
+         }
+         */
+        }
+</script>
+</body>
+</html>
