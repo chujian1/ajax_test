@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch</title>
+</head>
+<body>
+<!--原生自带，高版本浏览器兼容-->
+<button id="btn">按钮</button>
+<script type="text/javascript">
+    const oBtn = document.getElementById("btn");
+    oBtn.onclick = ()=>{
+        //get方式fetch('url?name=' + this.value)
+        fetch('1.txt')
+            .then((data)=>data.json())
+            .then((data)=>{
+                console.log(data);
+            })
+        //post方式
+        fetch('1.txt',{
+            method:"post",
+            headers:
+                new Headers({
+                "Content-Type":"application/x-www-form-urlencoded"//设置为表单方式提交
+                     }),
+            body:''//里面接受字符串
+        })
+            .then((data)=>data.json())
+            .then((data)=>{
+                console.log(data);
+            })
+    }
+
+</script>
+</body>
+</html>
