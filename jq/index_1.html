@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="oBtn">按钮</button>
+
+<script src="../jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+     $("#oBtn").click(()=>{
+         $.ajax({
+             url:"1.txt",//get方法在这加数据
+             data:"",//post方法在这加数据
+             method:"get",
+             dataType:"text",
+             success:(data)=>{
+                 alert(data)
+             },
+             error:(err)=>{
+                 alert(err)
+             }
+         })
+    })
+
+</script>
+</body>
+</html>
