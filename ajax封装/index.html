@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax封装</title>
+</head>
+<body>
+<script type="text/javascript">
+    function ajax(json) {
+        const obj = {
+            url:"",
+            method:"get",
+            data:{},
+            dataType:"json",
+            success:()=>{},
+            error:()=>{}
+        };
+//        Object.assign(obj,json);
+        for(let attr in json){
+            obj[attr] = json[attr];
+        }
+        const xhr = new XMLHttpRequest();
+        const arr = [];
+        for(let attr in obj.data){
+            arr.push( attr + "=" + obj.data[attr]);
+        }
+        obj.data = arr.join("&");
+        if(obj.method === "get"){
+            xhr.open("get",obj.url + "?" + obj.data,true);
+            xhr.send();
+        }
+        else if(xhr.method === "post"){
+            xhr.open("post",obj.url,true);
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.send(obj.data);
+        }
+        xhr.onreadystatechange = ()=>{
+            if(xhr.readyState === 4 && xhr.status === 200){
+                if(xhr.dataType === "json"){
+                    obj.success(JSON.parse(xhr.responseText));
+                }else if(xhr.dataType === "XML"){
+                    obj.success(xhr.responseXML);
+                }else{
+                    obj.success(xhr.responseText);
+                }
+            }
+            else
+                obj.error({status:xhr.status})
+        }
+    }
+    ajax({
+        url:"1.txt",
+        method:"get",
+        data:{},
+        dataType:"json",
+        success:(data)=>{
+            alert(data);
+        },
+        error:(err)=>{
+            alert(err)
+        }
+    })
+</script>
+</body>
+</html>
